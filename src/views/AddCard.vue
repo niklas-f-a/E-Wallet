@@ -11,11 +11,11 @@
       <div>
         <span>
           <label for="valid-to">VALID THRU</label><br>
-          <input v-model="input.validThru" type="number" id="valid-to" name="valid-to">
+          <input @input="formatValidThru" v-model="input.validThru" type="text" id="valid-to" name="valid-to">
         </span>
         <span> 
           <label for="ccv">CCV</label><br>
-          <input v-model="input.ccv" type="number" id="ccv" name="ccv">
+          <input @input="maxLengthCcv" v-model="input.ccv" type="text" id="ccv" name="ccv">
         </span>
       </div>
       <label for="vendor">VENDOR</label>
@@ -43,22 +43,36 @@ export default {
       ccv:'',
       img: ''
     }, 
-    formatNr:'',
+    fortmattedNr:'',
   }},
+  computed:{
+  },
   methods:{
+    maxLengthCcv(){
+      this.input.ccv = this.input.ccv.substring(0, 3)
+    },
     select(){     
       this.input.img = require(`@/assets/${this.input.vendor}.svg`)
     },
     updateCardNr(){
-      this.input.cardNumber.replace(/\s/g, "").length
-      if(this.input.cardNumber.replace(/\s/g, "").length % 4 == 0){
-        
-        this.input.cardNumber += ' '
-        console.log(this.input.cardNumber);
+      if(this.input.cardNumber.length < 19){
+        if(this.input.cardNumber.replace(/\s/g, "").length % 4 == 0){
+          this.input.cardNumber += ' '
+        }
+      }else{
+        this.input.cardNumber = this.input.cardNumber.substring(0, 19)
+      }      
+    },
+    formatValidThru(){
+      if(this.input.validThru.length < 5){
+        if(this.input.validThru.replace('/', '').length % 2 === 0){
+          this.input.validThru += '/'
+        }
+      }else{
+        this.input.validThru = this.input.validThru.substring(0, 5)
       }
     }
   }
-
 }
 </script>
 
