@@ -5,7 +5,7 @@
     <NewCard :info='input' />
     <form @submit.prevent="">
       <label for="card-number">CARD NUMBER</label>
-      <input v-model='input.cardNumber' @input="updateCardNr" type="text" id="card-number" name="card-number">
+      <input v-model='input.cardNumber' @input="inputCheck" type="text" id="card-number" name="card-number">
       <label for="card-holder">CARDHOLDER NAME</label>
       <input v-model="input.cardHolder" type="text" id="card-holder" name="card-holder">
       <div>
@@ -41,9 +41,10 @@ export default {
       cardHolder: '', 
       validThru: '',
       ccv:'',
-      img: ''
+      img: '',
+      color:'',
     }, 
-    fortmattedNr:'',
+    
   }},
   computed:{
   },
@@ -53,23 +54,22 @@ export default {
     },
     select(){     
       this.input.img = require(`@/assets/${this.input.vendor}.svg`)
+      switch(this.input.vendor){
+        case "bitcoin-inc": this.input.color = '#FFAE34';break;
+        case "ninja-bank": this.input.color = '#222222';break;
+        case "block-chain-inc": this.input.color = '#8B58F9';break;
+        case "evil-corp": this.input.color = '#F33355';break;
+        default: this.input.color = '#D0D0D0'
+      }
     },
-    updateCardNr(){
-      if(this.input.cardNumber.length < 19){
-        if(this.input.cardNumber.replace(/\s/g, "").length % 4 == 0){
-          this.input.cardNumber += ' '
-        }
-      }else{
-        this.input.cardNumber = this.input.cardNumber.substring(0, 19)
-      }      
+     inputCheck(){
+      if(this.input.cardNumber.length >= 16){
+        this.input.cardNumber = this.input.cardNumber.substring(0, 16)
+      }
     },
     formatValidThru(){
-      if(this.input.validThru.length < 5){
-        if(this.input.validThru.replace('/', '').length % 2 === 0){
-          this.input.validThru += '/'
-        }
-      }else{
-        this.input.validThru = this.input.validThru.substring(0, 5)
+        if(this.input.validThru.length >= 4){
+        this.input.validThru = this.input.validThru.substring(0, 4)
       }
     }
   }

@@ -1,19 +1,24 @@
 <template>
   <article class="new-card" 
+    :style="{backgroundColor: info.color}"
   >
     <span class="chip-img">
     <img src="@/assets/wifi_dark.svg" alt="">
     <img src="@/assets/chip.svg" alt="">
     </span>
     <img :src='info.img' alt="">
-    <h3>{{info.cardNumber}}</h3>
+    <h3>{{info.cardNumber.substring(0, 4)}} 
+      {{info.cardNumber.substring(4, 8)}} 
+      {{info.cardNumber.substring(8, 12)}} 
+      {{info.cardNumber.substring(12, 16)}}
+    </h3>
     <span class="name">
       <p>Cardholder Name </p>
       <h4>{{info.cardHolder}}</h4>
     </span>
     <span class="valid">
       <p>Valid thru</p>
-      <p>{{info.validThru}}</p>
+      <p>{{info.validThru.substring(0, 2)}}/{{info.validThru.substring(2, 4)}}</p>
     </span>
   </article>
 </template>
@@ -21,6 +26,7 @@
 <script>
 export default {
   props: {info: Object}
+
 }
 </script>
 
