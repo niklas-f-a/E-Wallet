@@ -68,5 +68,10 @@ button{
   border: 1px solid black;
   width: 95%;
   margin-bottom: 1rem;
+  cursor: pointer;
+  &:hover{
+    background-color: #000000;
+    color: white;
+  }
 }
 </style>

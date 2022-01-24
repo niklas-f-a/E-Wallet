@@ -140,6 +140,12 @@ export default {
     color: white;
     border-radius: 8px;
     border: none;
+    cursor: pointer;
+    &:hover{
+      background-color: white;
+      color: #000000;
+      border: 1px solid #000000;
+    }
   }
 }
  
