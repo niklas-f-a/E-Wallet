@@ -1,9 +1,12 @@
 <template>
   <main class="main">
     <h1>E-Wallet</h1>
-    <small>ACTIVE CARD</small>
+    <p>ACTIVE CARD</p>
     <div class="cards">
-      <CreditCard :card='active' />
+      <CreditCard v-if="active.vendor" :card='active'/>
+      <h1 v-else>no active</h1>
+      <h1 v-if="active.vendor && !cards[0]">you have no cards here</h1>
+      <!-- <h1 v-else-if="!active.card && !cards[0]">no cards</h1>       -->
       <CreditCard v-for="card in cards"
         @activate="$emit('activateCard', card)"
         :key="card.cardNumber"
@@ -24,14 +27,14 @@ export default {
 
 <style lang='scss' scoped>
 h1{
-  margin: 1rem auto 3rem auto;
+  margin: 1.5rem auto 1.5rem auto;
+  font-weight: bold;
 }
-small{
+p{
   margin-bottom: .5rem;
+  font-size: .7rem;
 }
 .active{
-
-  top: 0;
   margin-bottom: 3rem;
 }
 .cards{

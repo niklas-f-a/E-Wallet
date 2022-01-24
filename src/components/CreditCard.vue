@@ -1,7 +1,7 @@
 <template>
   <article class="credit-card" 
     :style="{backgroundColor: card.color}"
-    :class='{active: card.active}'
+    :class="[{active: card.active}, {yellow: card.vendor == 'bitcoin-inc'}]"
     @click="$emit('activate', card)"
   >
     <span class="chip-img">
@@ -9,10 +9,10 @@
     <img src="../assets/chip.svg" alt="">
     </span>
     <img :src="card.imgFile" alt="">
-    <h3>{{card.cardNumber}}</h3>
+    <h3>{{cardNumberWithSpaces}}</h3>
     <span class="name">
-      <p>Cardholder Name</p>
-      <h4>{{card.cardholder}}</h4>
+      <p>CardHolder Name</p>
+      <h5>{{card.cardHolder.toUpperCase()}}</h5>
     </span>
     <span class="valid">
       <p>Valid thru</p>
@@ -23,19 +23,40 @@
 
 <script>
 export default {
-  props: ['card']
+  props: ['card'],
+  computed:{
+     cardNumberWithSpaces(){
+      return `${this.card.cardNumber.substring(0, 4)} 
+        ${this.card.cardNumber.substring(4, 8)} 
+        ${this.card.cardNumber.substring(8, 12)} 
+        ${this.card.cardNumber.substring(12, 16)}`
+      }
+    }
 }
 </script>
 <style lang='scss'>
-
+.yellow > span > h5,.yellow > span > p, .yellow > h3{
+  color:#000000;  
+    h3, p, h5 {
+      text-shadow: .5px .5px 0px rgba(254, 254, 254, .24) inset;
+    }  
+  .valid  p{
+    text-shadow: -.5px -.5px 0px rgba(255, 255, 255, .25);
+    text-shadow: .5px .5px 0px rgba(255, 255, 255, .5);
+    }
+  }
 .credit-card{
   height: 10rem;
-  width: 80%;
+  width: 85%;
   border-radius: 8px;
   padding: .5rem 1rem;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 1fr 1fr 3rem 1fr 1fr;
+  grid-template-rows: 1fr 1fr 4rem 1fr 1fr;
+  background-image: linear-gradient(to top right, rgba(0,0,0,0),rgba(0, 0 , 0 , .16) );
+  box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.25);
+  -webkit-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.25);
+  -moz-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.25);
   .chip-img{
     grid-row: 1 / span 2;
     grid-column: 1 / 2;
@@ -54,23 +75,19 @@ export default {
     grid-column: 1 / 5;
     align-self: center;
     font-size: 21px;
-    color: white;
-    letter-spacing: .5px;
+    letter-spacing: 1.5px;
   }
   .name{
     display: flex;
     flex-direction: column;
     grid-row: 4 / 6;
     grid-column: 1 / 4;
-    align-items: start;
-    justify-content: center;
-    color: white;
+    justify-content: flex-start;
     p{
-      font-size: 12px;
+      font-size: 10px;
     }
-    h4{
-      font-family: 'PT Mono', monospace;
-      font-size: 16px;
+    h5{
+     font-weight: 300;
     }
   }
   .valid {
@@ -79,14 +96,16 @@ export default {
     grid-row: 4 / 6;
     grid-column: 4 / 6;
     align-items: end;
-    justify-content: center;
-    color: white;
      p:first-child{
-      font-size: 12px;
+      font-size: 10px;
     }p:last-of-type{
-      font-family: 'PT Mono', monospace;
       font-weight: 300;
+      font-size: 16px;
     }
+  }
+  h3, span > p, span > h5{
+    text-shadow: -.5px -.5px 0px rgba(255, 255, 255, .25);
+    text-shadow: .5px .5px 0px rgba(255, 255, 255, .5);
   }
  
 }

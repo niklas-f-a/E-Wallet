@@ -3,10 +3,10 @@
     :style="{backgroundColor: info.color}"
   >
     <span class="chip-img">
-    <img src="@/assets/wifi_dark.svg" alt="">
+    <img src="@/assets/wifi_white.svg">
     <img src="@/assets/chip.svg" alt="">
     </span>
-    <img :src='info.img' alt="">
+    <img v-if="info.imgFile" :src="info.imgFile()" alt="">
     <h3>{{info.cardNumber.substring(0, 4)}} 
       {{info.cardNumber.substring(4, 8)}} 
       {{info.cardNumber.substring(8, 12)}} 
@@ -14,18 +14,21 @@
     </h3>
     <span class="name">
       <p>Cardholder Name </p>
-      <h4>{{info.cardHolder}}</h4>
+      <h4>{{info.cardHolder.toUpperCase()}}</h4>
     </span>
     <span class="valid">
       <p>Valid thru</p>
-      <p>{{info.validThru.substring(0, 2)}}/{{info.validThru.substring(2, 4)}}</p>
+      <p v-if="!info.expireMonth">MM/YY</p>
+      <p v-else>{{info.expireMonth}}/{{info.expireYear}}</p>
     </span>
   </article>
 </template>
 
 <script>
 export default {
-  props: {info: Object}
+  props: {
+    info: Object,
+  }
 
 }
 </script>

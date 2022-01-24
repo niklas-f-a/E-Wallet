@@ -2,20 +2,20 @@
   <main class="main">
     <h1>ADD A NEW BANK CARD</h1>
     <small>NEW CARD</small>
-    <NewCard :info='input' />
+    <NewCard :info='input' /> 
     <form @submit.prevent="">
       <label for="card-number">CARD NUMBER</label>
-      <input v-model='input.cardNumber' @input="inputCheck" type="text" id="card-number" name="card-number">
+      <input v-model='input.cardNumber' @input="inputCheck" type="number" id="card-number" name="card-number" ref="focusMe">
       <label for="card-holder">CARDHOLDER NAME</label>
       <input v-model="input.cardHolder" type="text" id="card-holder" name="card-holder">
       <div>
         <span>
           <label for="valid-to">VALID THRU</label><br>
-          <input @input="formatValidThru" v-model="input.validThru" type="text" id="valid-to" name="valid-to">
+          <input @change="getDates" type="month" id="valid-to" name="valid-to">
         </span>
         <span> 
           <label for="ccv">CCV</label><br>
-          <input @input="maxLengthCcv" v-model="input.ccv" type="text" id="ccv" name="ccv">
+          <input @input="maxLengthCcv" v-model="input.ccv" type="number" id="ccv" name="ccv">
         </span>
       </div>
       <label for="vendor">VENDOR</label>
@@ -25,35 +25,58 @@
         <option value="block-chain-inc">BLOCK CHAIN INC</option>
         <option value="evil-corp">EVIL CORP</option>
       </select>
-      <button >ADD CARD</button>
+      <button @click="validateInput">ADD CARD</button>
     </form>
   </main>
 </template>
 
 <script>
+
 import NewCard from '../components/NewCard'
 export default {
   components: {NewCard},
+  mounted(){
+      document.querySelector('input:first-of-type').focus()
+  },
   data(){return {
     input:{
+      expireMonth: '', 
+      expireYear: '', 
       vendor: '',
       cardNumber: '', 
       cardHolder: '', 
-      validThru: '',
       ccv:'',
-      img: '',
+      imgFile: '',
       color:'',
     }, 
-    
+    monthAndYearValid: false,
+    ccvValid: false,
+    vendorValid: false,
+    cardNrValid: false,
   }},
-  computed:{
-  },
   methods:{
+    validateInput(){
+      if(this.input.cardHolder.length > 1 && /\s/.test(this.input.cardHolder) 
+        && this.monthAndYearValid && this.vendorValid && this.cardNrValid){
+          this.$emit('cardInfo', {...this.input})
+        }else{
+          console.log('false');
+        }        
+    },
+    getDates(e){
+      const [year, month] = e.target.value.split('-')
+      this.input.expireYear = year.substring(2, 4)
+      this.input.expireMonth = month
+      this.monthAndYearValid = true
+    },
     maxLengthCcv(){
       this.input.ccv = this.input.ccv.substring(0, 3)
+      if(this.input.ccv.length > 2){this.ccvValid = true}
+        else{this.ccvValid = false}
     },
     select(){     
-      this.input.img = require(`@/assets/${this.input.vendor}.svg`)
+      this.input.imgFile = () => require(`@/assets/${this.input.vendor}.svg`)
+      this.vendorValid = true
       switch(this.input.vendor){
         case "bitcoin-inc": this.input.color = '#FFAE34';break;
         case "ninja-bank": this.input.color = '#222222';break;
@@ -65,19 +88,17 @@ export default {
      inputCheck(){
       if(this.input.cardNumber.length >= 16){
         this.input.cardNumber = this.input.cardNumber.substring(0, 16)
+        this.cardNrValid = true
+      }else{
+        this.cardNrValid = false
       }
     },
-    formatValidThru(){
-        if(this.input.validThru.length >= 4){
-        this.input.validThru = this.input.validThru.substring(0, 4)
-      }
-    }
   }
 }
 </script>
 
 <style lang='scss' scoped>
-  h1{
+  h1  {
     width: 10rem;
     text-align: center;
   }
