@@ -8,6 +8,7 @@
     />
     <AddCard v-else-if="currentView === 'addcard'" 
       @cardInfo='collect'
+      :cards="vendorCards"
     />
   </div>
 </template>
@@ -32,7 +33,7 @@ export default {
   },
   methods: {
     collect(card){
-      console.log(card, this.vendorCards);
+      
       card.active = false
       this.vendorCards.push(card)
       localStorage.setItem('cards', JSON.stringify(this.vendorCards))
@@ -89,7 +90,7 @@ body{
 }
 .main{
   margin-top: 2rem;
-  width: 20rem;
+  width: 23rem;
   background-color: #ffffff;
   display: flex;
   flex-direction: column;

@@ -1,6 +1,7 @@
 <template>
   <article class="new-card" 
     :style="{backgroundColor: info.color}"
+    :class="{yellow: info.vendor == 'bitcoin-inc'}"
   >
     <span class="chip-img">
       <img src="@/assets/wifi_white.svg">
@@ -40,10 +41,16 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+.yellow > span > h4,.yellow > span > p, .yellow > h3{
+  color:#000000; 
+  h3, p, h4 {
+      text-shadow: .5px .5px 0px rgba(254, 254, 254, .24) inset;
+  } 
+} 
 .new-card{
   background-color: #D0D0D0;
   height: 10rem;
-  width: 85%;
+  width: 17rem;
   border-radius: 8px;
   padding: .5rem 1rem;
   display: grid;
@@ -71,7 +78,7 @@ export default {
     grid-column: 1 / 5;
     align-self: center;
     font-size: 21px;
-    color: white;
+   
     letter-spacing: 1.5px;
   }
   .name{
@@ -83,13 +90,13 @@ export default {
     justify-content: flex-start;
     p{
       font-size: 12px;
-      color: white;
+      
     }
     h4{
       font-family: 'PT Mono', monospace;
       font-size: 16px;
       font-weight: 300;
-      color: white;
+      
     }
   }
   .valid {
@@ -99,21 +106,23 @@ export default {
     grid-column: 4 / 6;
     align-items: end;
     justify-content: flex-start;
-    color: white;
+    .valid  p{
+    text-shadow: -.5px -.5px 0px rgba(255, 255, 255, .25);
+    text-shadow: .5px .5px 0px rgba(255, 255, 255, .5);
+    }
      p:first-child{
       font-size: 10px;
-      color: white;
+     
       
     }p:last-of-type{
       font-family: 'PT Mono', monospace;
-      font-weight: 300;
-      color: white;
+      font-weight: 300;     
     }
   }
-  // h3 p h4{
-  //   text-shadow: .5px .5px 0px rgba(254, 254, 254, .24)inset;
-
-  // }
+  h3, span > p, span > h4{
+    text-shadow: -.5px -.5px 0px rgba(255, 255, 255, .25);
+    text-shadow: .5px .5px 0px rgba(255, 255, 255, .5);
+  }
  
 }
 </style>

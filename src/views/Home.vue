@@ -66,7 +66,7 @@ button{
   color: black;
   border-radius: 8px;
   border: 1px solid black;
-  width: 95%;
+  width: 19rem;
   margin-bottom: 1rem;
   cursor: pointer;
   &:hover{
