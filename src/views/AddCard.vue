@@ -75,7 +75,7 @@ export default {
         else{this.ccvValid = false}
     },
     select(){     
-      this.input.imgFile = () => require(`@/assets/${this.input.vendor}.svg`)
+      this.input.imgFile = require(`@/assets/${this.input.vendor}.svg`)
       this.vendorValid = true
       switch(this.input.vendor){
         case "bitcoin-inc": this.input.color = '#FFAE34';break;
@@ -99,8 +99,13 @@ export default {
 
 <style lang='scss' scoped>
   h1  {
-    width: 10rem;
+    width: 11rem;
     text-align: center;
+    margin-bottom: 1rem;
+  }
+  small{
+    margin-bottom: .5rem;
+    font-size: 10px;
   }
   form{
   margin: 3rem auto 1rem auto;
@@ -120,7 +125,11 @@ export default {
     display: flex;
     justify-content: space-between;
     input{
-    width: 10rem;
+    width: 6rem;
+    }
+    input:first-of-type{
+      height: .7rem;
+      font-size: 10px;
     }
   }
   button{

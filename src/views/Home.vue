@@ -1,16 +1,20 @@
 <template>
   <main class="main">
     <h1>E-Wallet</h1>
-    <p>ACTIVE CARD</p>
-    <div class="cards">
-      <CreditCard v-if="active.vendor" :card='active'/>
-      <h1 v-else>no active</h1>
-      <h1 v-if="active.vendor && !cards[0]">you have no cards here</h1>
+    <small>ACTIVE CARD</small>
+    <CreditCard v-if="active.vendor" :card='active'/>
+    <h1 v-else>no active</h1>
+    <!-- <h1 v-if="active.vendor && !cards[0]">you have no cards here</h1>   -->
+    <div class="cards"
+      :style="{height: cards.length * 2.5 + 10 + 'rem'}"
+    >
       <!-- <h1 v-else-if="!active.card && !cards[0]">no cards</h1>       -->
-      <CreditCard v-for="card in cards"
+      <CreditCard v-for="(card, index) in cards"
+        class="other-cards"
         @activate="$emit('activateCard', card)"
         :key="card.cardNumber"
         :card='card'
+        :style="{top: index * 2.5 +'rem'}"
       />
     </div>
     <button @click="$emit('newCard')" >ADD A NEW CARD</button>
@@ -26,6 +30,10 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+small{
+  margin-bottom: .5rem;
+  font-size: 10px;
+}
 h1{
   margin: 1.5rem auto 1.5rem auto;
   font-weight: bold;
@@ -35,16 +43,20 @@ p{
   font-size: .7rem;
 }
 .active{
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
+}
+.other-cards{
+  position: absolute;
 }
 .cards{
-  width:100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 20rem;   
   position: relative;
-  min-height: 30rem;
-   
+  :hover{
+    cursor: pointer;
+  }
 }
 button{
   font-size: 22px;
@@ -54,7 +66,7 @@ button{
   color: black;
   border-radius: 8px;
   border: 1px solid black;
-  width: 90%;
-  margin: 2rem auto 1rem auto;
+  width: 95%;
+  margin-bottom: 1rem;
 }
 </style>

@@ -47,12 +47,12 @@ export default {
   }
 .credit-card{
   height: 10rem;
-  width: 85%;
+  width: 17rem;
   border-radius: 8px;
   padding: .5rem 1rem;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 1fr 1fr 4rem 1fr 1fr;
+  grid-template-rows: 3rem 1fr 4rem 1fr 1fr;
   background-image: linear-gradient(to top right, rgba(0,0,0,0),rgba(0, 0 , 0 , .16) );
   box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.25);
   -webkit-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.25);

@@ -70,7 +70,7 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@700&display=swap");
 $textFont: 'Source Sans Pro', sans-serif;
 $cardFont: 'PT Mono', monospace;
-$red: #f33355;
+
 html, body, h1, h2, h3, h4, p, h5 {
   margin: 0;
   padding: 0;
