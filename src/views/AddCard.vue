@@ -5,7 +5,7 @@
     <NewCard :info='input' /> 
     <form @submit.prevent="validateInput">
       <label for="card-number">CARD NUMBER</label>
-      <input placeholder="XXXX XXXX XXXX XXXX" type="number" id="card-number" name="card-number" ref="focusMe"
+      <input  placeholder="XXXX XXXX XXXX XXXX" type="number" id="card-number" name="card-number" ref="focusMe"
         :class="{errorborder: error.cardNr}"
         v-model='input.cardNumber' 
         @input="inputCheck" 
@@ -66,7 +66,7 @@ export default {
   components: {NewCard},
   props: ['cards'],
   mounted(){
-      document.querySelector('input:first-of-type').focus()
+      this.$refs.focusMe.focus()
   },
   data(){return {
     input:{

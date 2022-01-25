@@ -8,6 +8,7 @@
       @toggleRemove='removeOption'
       :option='removeOptions'
       @checkIt='check'
+      @remove='deleteItem'
     />
     <AddCard v-else-if="currentView === 'addcard'" 
       @cardInfo='collect'
@@ -31,16 +32,21 @@ export default {
       this.vendorCards = [...JSON.parse(cards)]
       this.vendorCards.forEach(card => card.imgFile = require(`@/assets/${card.vendor}.svg`))
       this.activeCard = this.vendorCards.find(c => c.active === true)
-      // this.vendorCards.forEach(card => card.remove = true)
     }
   },
   methods: {
+    deleteItem(){
+      this.vendorCards = this.vendorCards.filter(c => c.remove == false)
+      localStorage.setItem('cards', JSON.stringify(this.vendorCards))
+    },
     check(card){
       card.remove = !card.remove
-      console.log(card);
     },
     removeOption(){
       this.removeOptions = !this.removeOptions
+      if(this.removeOptions === false){
+        this.vendorCards.forEach(c => c.remove = false)
+      }
     },
     collect(card){
       card.active = false
@@ -56,6 +62,7 @@ export default {
       this.vendorCards.forEach(c => c.active = false)
       card.active = true
       this.activeCard = card
+      this.activeCard.remove = false
       localStorage.setItem('cards', JSON.stringify(this.vendorCards))
     }
   },

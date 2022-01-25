@@ -20,8 +20,11 @@
         @check="$emit('checkIt', card)"
       />
     </div>
-    <button v-if="!option" class="removebtn" @click="$emit('toggleRemove')">REMOVE CARD</button>
-    <button v-else class="removebtn" @click="$emit('toggleRemove')">CANCEL</button>
+    <span class="btn-controler">
+      <button @click="$emit('remove')" v-if="option" class="remove">REMOVE</button>
+      <button v-if="!option" class="removebtn" @click="$emit('toggleRemove')">REMOVE CARD</button>
+      <button v-else class="removebtn" @click="$emit('toggleRemove')">CANCEL</button>
+    </span>
     <button class="addbtn" @click="$emit('newCard')" >ADD A NEW CARD</button>
   </main>
 </template>
@@ -35,17 +38,21 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-.removebtn{
-  background-color: white;
-  margin-bottom: .5rem;
-  margin-right: 2rem;
-  font-weight: 600;
-  border-radius: 8px;
-  align-self: flex-end;
-  &:hover{
-    cursor: pointer;
-    background-color: red;
-    color: white;
+.btn-controler{
+  width: 80%;
+  display: flex;
+  justify-content: flex-end;
+  .removebtn, .remove{
+    background-color: white;
+    margin-bottom: .5rem;
+    margin-left: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    &:hover{
+      cursor: pointer;
+      background-color: red;
+      color: white;
+    }
   }
 }
 small{
