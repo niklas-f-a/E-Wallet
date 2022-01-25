@@ -4,6 +4,11 @@
     :class="[{active: card.active}, {yellow: card.vendor == 'bitcoin-inc'}]"
     @click="$emit('activate', card)"
   >
+    <div v-if="removeOption" class="check-box">
+      <input type="checkbox" 
+        @click.stop="$emit('ckecked', card)"
+      >
+    </div>
     <span class="chip-img">
     <img src="../assets/wifi_dark.svg" alt="">
     <img src="../assets/chip.svg" alt="">
@@ -23,7 +28,7 @@
 
 <script>
 export default {
-  props: ['card'],
+  props: ['card', 'removeOption'],
   computed:{
      cardNumberWithSpaces(){
       return `${this.card.cardNumber.substring(0, 4)} 
@@ -35,6 +40,17 @@ export default {
 }
 </script>
 <style lang='scss'>
+.check-box{
+  border-radius: 35%;
+  width: 25px;
+  height: 25px;
+  background-color: rgba(207, 82, 82, 0.411);
+  position: absolute;
+  left: -28px;
+  top: 10px;
+  display: grid;
+  place-items: center;
+}
 .yellow > span > h5,.yellow > span > p, .yellow > h3{
   color:#000000;  
     h3, p, h5 {
@@ -46,6 +62,7 @@ export default {
     }
   }
 .credit-card{
+  position: relative;
   height: 10rem;
   width: 17rem;
   border-radius: 8px;

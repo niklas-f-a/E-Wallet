@@ -4,20 +4,21 @@
     <small>ACTIVE CARD</small>
     <CreditCard v-if="active.vendor" :card='active'/>
     <h1 v-else>no active</h1>
-    <!-- <h1 v-if="active.vendor && !cards[0]">you have no cards here</h1>   -->
     <div class="cards"
       :style="{height: cards.length * 2.5 + 10 + 'rem'}"
     >
-      <!-- <h1 v-else-if="!active.card && !cards[0]">no cards</h1>       -->
       <CreditCard v-for="(card, index) in cards"
         class="other-cards"
         @activate="$emit('activateCard', card)"
         :key="card.cardNumber"
         :card='card'
         :style="{top: index * 2.5 +'rem'}"
+        :removeOption='option'
+        @checked="$emit('check')"
       />
     </div>
-    <button @click="$emit('newCard')" >ADD A NEW CARD</button>
+    <button class="removebtn" @click="$emit('remove')">REMOVE CARD</button>
+    <button class="addbtn" @click="$emit('newCard')" >ADD A NEW CARD</button>
   </main>
 </template>
 
@@ -25,11 +26,24 @@
 import CreditCard from '../components/CreditCard'
 export default {
   components: { CreditCard },
-  props: ['cards', 'active'],
+  props: ['cards', 'active', 'option'],
 }
 </script>
 
 <style lang='scss' scoped>
+.removebtn{
+  background-color: white;
+  margin-bottom: .5rem;
+  margin-right: 2rem;
+  font-weight: 600;
+  border-radius: 8px;
+  align-self: flex-end;
+  &:hover{
+    cursor: pointer;
+    background-color: red;
+    color: white;
+  }
+}
 small{
   margin-bottom: .5rem;
   font-size: 10px;
@@ -58,7 +72,8 @@ p{
     cursor: pointer;
   }
 }
-button{
+
+.addbtn{
   font-size: 22px;
   font-weight: bolder;
   padding: 1rem;
@@ -73,5 +88,6 @@ button{
     background-color: #000000;
     color: white;
   }
+  
 }
 </style>

@@ -32,7 +32,13 @@
       <small :class="{error: error.vendor}">{{error.vendor}}</small>
       <button>ADD CARD</button>
     </form>
-    <div class="uniqueModal" v-if="!uniqueNr">hahahhahaha</div>
+    
+    <div class="fade" v-if="!uniqueNr">
+    </div>
+    <section v-if="!uniqueNr" class='existModal'>
+        <h2>Card Already Exists!</h2>
+        <button @click="uniqueNr = true">BACK</button>
+    </section>
   </main>
 </template>
 
@@ -77,7 +83,7 @@ export default {
       if(e.target.value < 1){
         this.error.name = ''
       }
-      if(e.target.value.match(/^[A-Za-z\s]+$/)){
+      if(e.target.value.match(/^[A-ZÅÄÖa-zåäö\s]+$/)){
         this.noNumbers = true
         this.error.name = ''      
       }else {        
@@ -87,9 +93,8 @@ export default {
      
     },
     validateInput(){
-      //console.log(this.input.cardNumber == this.cards[0].cardNumber);
       const exists = this.cards.find(c => c.cardNumber == this.input.cardNumber)
-      console.log(!exists);
+      console.log(exists);
       if(exists){
         this.uniqueNr = false
       }else{ 
@@ -153,6 +158,39 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+.existModal{
+  position: absolute;
+  top: 18rem;
+  border: 1px solid black;
+  width: 12rem;
+  height: 8rem;
+  background-color: white;
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  h2{
+    text-align: center;
+    color: black;
+  }
+  button{
+    padding: .5rem;
+    width: 80%;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+}
+.fade{
+  background-color: black;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: .3;
+}
 .error{
   color: red;
 }

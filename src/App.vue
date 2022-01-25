@@ -5,6 +5,9 @@
       :active='activeCard'
       @activateCard='activate'
       @newCard='newCardPage'
+      @remove='removeOption'
+      :option='removeOptions'
+      @check="checked"
     />
     <AddCard v-else-if="currentView === 'addcard'" 
       @cardInfo='collect'
@@ -32,8 +35,13 @@ export default {
     }
   },
   methods: {
+    checked(card){
+      console.log(card);
+    },
+    removeOption(){
+      this.removeOptions = true
+    },
     collect(card){
-      
       card.active = false
       this.vendorCards.push(card)
       localStorage.setItem('cards', JSON.stringify(this.vendorCards))
@@ -61,6 +69,7 @@ export default {
     currentView: 'home',
     activeCard: {},
     vendorCards: [], 
+    removeOptions: false,
   }}
 }
 </script>
