@@ -5,25 +5,44 @@
     <NewCard :info='input' /> 
     <form @submit.prevent="validateInput">
       <label for="card-number">CARD NUMBER</label>
-      <input :class="{errorborder: error.cardNr}" v-model='input.cardNumber' @input="inputCheck" placeholder="XXXX XXXX XXXX XXXX" type="number" id="card-number" name="card-number" ref="focusMe">
+      <input placeholder="XXXX XXXX XXXX XXXX" type="number" id="card-number" name="card-number" ref="focusMe"
+        :class="{errorborder: error.cardNr}"
+        v-model='input.cardNumber' 
+        @input="inputCheck" 
+      >
       <small :class="{error: error.cardNr}">{{error.cardNr}}</small>
       <label for="card-holder">CARDHOLDER NAME</label>
-      <input :class="{errorborder: error.name}" @input="validCharacter" v-model="input.cardHolder" placeholder="Firstname Lastname" type="text" id="card-holder" name="card-holder">
+      <input placeholder="Firstname Lastname" type="text" id="card-holder" name="card-holder"
+        :class="{errorborder: error.name}" 
+        @input="validCharacter" 
+        v-model="input.cardHolder"
+      >
       <small :class="{error: error.name}">{{error.name}}</small>
       <div>
         <span>
           <label for="valid-to">VALID THRU</label><br>
-          <input :class="{errorborder: error.monthAndYear}" @change="getDates" type="month" min="2022-01" max="2027-12" id="valid-to" name="valid-to"><br>
+          <input type="month" min="2022-01" max="2027-12" id="valid-to" name="valid-to"
+            :class="{errorborder: error.monthAndYear}" 
+            @change="getDates"
+          ><br>
           <small :class="{error: error.monthAndYear}">{{error.monthAndYear}}</small>
         </span>
         <span> 
           <label for="ccv">CCV</label><br>
-          <input :class="{errorborder: error.ccv}" @input="maxLengthCcv" v-model="input.ccv" type="number" id="ccv" name="ccv"><br>
+          <input type="number" id="ccv" name="ccv"
+            :class="{errorborder: error.ccv}" 
+            @input="maxLengthCcv" 
+            v-model="input.ccv" 
+          ><br>
           <small :class="{error: error.ccv}">{{error.ccv}}</small>
         </span>
       </div>
       <label for="vendor">VENDOR</label>
-      <select :class="{errorborder: error.vendor}" @change="select" v-model="input.vendor" name="vendor" id="vendor">
+      <select  name="vendor" id="vendor"
+        :class="{errorborder: error.vendor}"
+        @change="select"
+        v-model="input.vendor"
+      >
         <option value="bitcoin-inc">BITCOIN INC</option>
         <option value="ninja-bank">NINJA BANK</option>
         <option value="block-chain-inc">BLOCK CHAIN INC</option>
@@ -32,12 +51,10 @@
       <small :class="{error: error.vendor}">{{error.vendor}}</small>
       <button>ADD CARD</button>
     </form>
-    
-    <div class="fade" v-if="!uniqueNr">
-    </div>
+    <div class="fade" v-if="!uniqueNr"></div>
     <section v-if="!uniqueNr" class='existModal'>
-        <h2>Card Already Exists!</h2>
-        <button @click="uniqueNr = true">BACK</button>
+      <h2>Card Already Exists!</h2>
+      <button @click="uniqueNr = true">BACK</button>
     </section>
   </main>
 </template>
@@ -50,7 +67,6 @@ export default {
   props: ['cards'],
   mounted(){
       document.querySelector('input:first-of-type').focus()
-      console.log(this.cards);
   },
   data(){return {
     input:{
@@ -93,7 +109,6 @@ export default {
     },
     validateInput(){
       const exists = this.cards.find(c => c.cardNumber == this.input.cardNumber)
-      console.log(exists);
       if(exists){
         this.uniqueNr = false
       }else{ 

@@ -5,13 +5,14 @@
     @click="$emit('activate', card)"
   >
     <div v-if="removeOption" class="check-box">
-      <input type="checkbox" 
+      <input type="checkbox"  
+        :checked='card.remove'
         @click.stop="$emit('ckecked', card)"
       >
     </div>
     <span class="chip-img">
-    <img src="../assets/wifi_dark.svg" alt="">
-    <img src="../assets/chip.svg" alt="">
+      <img src="../assets/wifi_dark.svg" alt="">
+      <img src="../assets/chip.svg" alt="">
     </span>
     <img :src="card.imgFile" alt="">
     <h3>{{cardNumberWithSpaces}}</h3>

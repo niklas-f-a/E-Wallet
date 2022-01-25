@@ -2,7 +2,10 @@
   <main class="main">
     <h1>E-Wallet</h1>
     <small>ACTIVE CARD</small>
-    <CreditCard v-if="active.vendor" :card='active'/>
+    <CreditCard 
+      v-if="active.vendor"
+      :card='active'
+    />
     <h1 v-else>no active</h1>
     <div class="cards"
       :style="{height: cards.length * 2.5 + 10 + 'rem'}"

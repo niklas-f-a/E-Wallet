@@ -31,17 +31,19 @@ export default {
       this.vendorCards = [...JSON.parse(cards)]
       this.vendorCards.forEach(card => card.imgFile = require(`@/assets/${card.vendor}.svg`))
       this.activeCard = this.vendorCards.find(c => c.active === true)
+      // this.vendorCards.forEach(card => card.remove = true)
     }
   },
   methods: {
     checked(card){
-      console.log(card);
+      card.remove = true
     },
     removeOption(){
       this.removeOptions = true
     },
     collect(card){
       card.active = false
+      card.remove = false
       this.vendorCards.push(card)
       localStorage.setItem('cards', JSON.stringify(this.vendorCards))
       this.currentView = 'home'

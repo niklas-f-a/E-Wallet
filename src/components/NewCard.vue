@@ -7,7 +7,9 @@
       <img src="@/assets/wifi_white.svg">
       <img src="@/assets/chip.svg" alt="">
     </span>
-    <img v-if="info.imgFile" :src="info.imgFile" alt="">
+    <img v-if="info.imgFile" alt=""
+      :src="info.imgFile"
+    >
     <h3>
       {{cardNr}} 
     </h3>
