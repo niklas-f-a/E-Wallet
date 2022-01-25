@@ -17,10 +17,11 @@
         :card='card'
         :style="{top: index * 2.5 +'rem'}"
         :removeOption='option'
-        @checked="$emit('check')"
+        @check="$emit('checkIt', card)"
       />
     </div>
-    <button class="removebtn" @click="$emit('remove')">REMOVE CARD</button>
+    <button v-if="!option" class="removebtn" @click="$emit('toggleRemove')">REMOVE CARD</button>
+    <button v-else class="removebtn" @click="$emit('toggleRemove')">CANCEL</button>
     <button class="addbtn" @click="$emit('newCard')" >ADD A NEW CARD</button>
   </main>
 </template>

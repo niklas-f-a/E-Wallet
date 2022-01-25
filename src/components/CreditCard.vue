@@ -7,7 +7,7 @@
     <div v-if="removeOption" class="check-box">
       <input type="checkbox"  
         :checked='card.remove'
-        @click.stop="$emit('ckecked', card)"
+        @click.stop="checkThis"       
       >
     </div>
     <span class="chip-img">
@@ -31,13 +31,18 @@
 export default {
   props: ['card', 'removeOption'],
   computed:{
-     cardNumberWithSpaces(){
+    cardNumberWithSpaces(){
       return `${this.card.cardNumber.substring(0, 4)} 
         ${this.card.cardNumber.substring(4, 8)} 
         ${this.card.cardNumber.substring(8, 12)} 
         ${this.card.cardNumber.substring(12, 16)}`
-      }
     }
+  },
+  methods:{
+    checkThis(){
+      this.$emit('check', this.card)
+    }
+  }
 }
 </script>
 <style lang='scss'>

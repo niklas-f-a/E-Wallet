@@ -5,9 +5,9 @@
       :active='activeCard'
       @activateCard='activate'
       @newCard='newCardPage'
-      @remove='removeOption'
+      @toggleRemove='removeOption'
       :option='removeOptions'
-      @check="checked"
+      @checkIt='check'
     />
     <AddCard v-else-if="currentView === 'addcard'" 
       @cardInfo='collect'
@@ -35,11 +35,12 @@ export default {
     }
   },
   methods: {
-    checked(card){
-      card.remove = true
+    check(card){
+      card.remove = !card.remove
+      console.log(card);
     },
     removeOption(){
-      this.removeOptions = true
+      this.removeOptions = !this.removeOptions
     },
     collect(card){
       card.active = false
