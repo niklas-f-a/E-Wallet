@@ -79,16 +79,15 @@ export default {
     }
   }},
   methods:{
-    validCharacter(e){
-      if(e.target.value < 1){
-        this.error.name = ''
-      }
+    validCharacter(e){     
       if(e.target.value.match(/^[A-ZÅÄÖa-zåäö\s]+$/)){
         this.noNumbers = true
         this.error.name = ''      
       }else {        
         this.error.name = 'NO NUMBERS'
         this.noNumbers = false
+      } if(e.target.value < 1){
+        this.error.name = ''
       }
      
     },
@@ -100,7 +99,7 @@ export default {
       }else{ 
         this.uniqueNr = true
       }
-      if(!/\s/.test(this.input.cardHolder)){
+      if(!/\s/.test(this.input.cardHolder.trim())){
         this.error.name = 'MUST HAVE FIRST AND LAST NAME' }
         else{
         this.nameValid = true
@@ -223,6 +222,7 @@ export default {
   div{
     display: flex;
     justify-content: space-between;
+    margin-bottom: 1rem;
     input{
     width: 6rem;
     }

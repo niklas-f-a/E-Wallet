@@ -31,7 +31,6 @@ export default {
       this.vendorCards = [...JSON.parse(cards)]
       this.vendorCards.forEach(card => card.imgFile = require(`@/assets/${card.vendor}.svg`))
       this.activeCard = this.vendorCards.find(c => c.active === true)
-      console.log(this.vendorCards);
     }
   },
   methods: {
@@ -49,9 +48,6 @@ export default {
     },
     newCardPage(){
       this.currentView = 'addcard'
-    },
-    expiration(card){
-    return `${card.expireMonth}/${card.expireYear}`
     },
     activate(card){
       this.vendorCards.forEach(c => c.active = false)
