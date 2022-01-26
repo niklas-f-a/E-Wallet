@@ -31,7 +31,9 @@ export default {
     if(cards){
       this.vendorCards = [...JSON.parse(cards)]
       this.vendorCards.forEach(card => card.imgFile = require(`@/assets/${card.vendor}.svg`))
-      this.activeCard = this.vendorCards.find(c => c.active === true)
+      if(this.vendorCards.find(c => c.active === true)){
+        this.activeCard = this.vendorCards.find(c => c.active === true)
+      }else this.activeCard = {}
     }
   },
   methods: {
@@ -60,11 +62,16 @@ export default {
       this.currentView = 'addcard'
     },
     activate(card){
-      this.vendorCards.forEach(c => c.active = false)
-      card.active = true
-      this.activeCard = card
-      this.activeCard.remove = false
-      localStorage.setItem('cards', JSON.stringify(this.vendorCards))
+      if(card.active){
+        card.active = false
+        localStorage.setItem('cards', JSON.stringify(this.vendorCards))
+      }else{
+        this.activeCard.active = false
+        card.active = true
+        this.activeCard = card
+        this.activeCard.remove = false
+        localStorage.setItem('cards', JSON.stringify(this.vendorCards))
+      }
     }
   },
   computed: {

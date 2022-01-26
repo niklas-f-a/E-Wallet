@@ -3,9 +3,9 @@
     <h1>E-Wallet</h1>
     <small>ACTIVE CARD</small>
     <CreditCard
-      v-if="active"
+      v-if="active.active"
       :card='active' 
-      @activate="$emit('activateCard', active)"     
+      @activate="$emit('activateCard', active)"
     />
     <h1 v-else>no active</h1>
     <div class="cards"
