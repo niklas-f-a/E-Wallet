@@ -30,7 +30,8 @@ export default {
     const cards = localStorage.getItem('cards')
     if(cards){
       this.vendorCards = [...JSON.parse(cards)]
-      this.vendorCards.forEach(card => card.imgFile = require(`@/assets/${card.vendor}.svg`))
+      console.log(this.vendorCards);
+      // this.vendorCards.forEach(card => card.imgFile = require(`@/assets/${card.vendor}.svg`))
       if(this.vendorCards.find(c => c.active === true)){
         this.activeCard = this.vendorCards.find(c => c.active === true)
       }else this.activeCard = {}

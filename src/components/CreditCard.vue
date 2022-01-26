@@ -11,8 +11,9 @@
       >
     </div>
     <span class="chip-img">
-      <img src="../assets/wifi_dark.svg" alt="">
-      <img src="../assets/chip.svg" alt="">
+      <img v-if="card.vendor == 'ninja-bank'" src="@/assets/wifi_white.svg" alt="">
+      <img v-else src="@/assets/wifi_dark.svg" alt="">
+      <img src="@/assets/chip.svg" alt="">
     </span>
     <img :src="card.imgFile" alt="">
     <h3 v-if="card">{{cardNumberWithSpaces}}</h3>
@@ -98,7 +99,7 @@ export default {
   :hover{
     cursor: pointer;
   }
-  .chip-img{
+  .chip-img{    
     grid-row: 1 / span 2;
     grid-column: 1 / 2;
     display: flex;
