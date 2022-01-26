@@ -1,7 +1,7 @@
 <template>
   <article class="new-card" 
-    :style="{backgroundColor: info.color}"
-    :class="{yellow: info.vendor == 'bitcoin-inc'}"
+    :class="{bitcoin: info.vendor == 'bitcoin-inc', blockchain: info.vendor == 'block-chain-inc', 
+      ninja: info.vendor == 'ninja-bank', evil: info.vendor == 'evil-corp'}"
   >
     <span class="chip-img">
       <img src="@/assets/wifi_white.svg">
@@ -43,12 +43,24 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-.yellow > span > h4,.yellow > span > p, .yellow > h3{
+.bitcoin > span > h4,.bitcoin > span > p, .bitcoin > h3{
   color:#000000; 
   h3, p, h4 {
       text-shadow: .5px .5px 0px rgba(254, 254, 254, .24) inset;
   } 
-} 
+}
+.new-card.bitcoin{
+  background-color: #FFAE34;
+}
+.new-card.ninja{
+  background-color: #222222;
+}
+.new-card.blockchain{
+  background-color: #8B58F9;
+}
+.new-card.evil{
+  background-color: #F33355;
+}
 .new-card{
   background-color: #D0D0D0;
   height: 10rem;

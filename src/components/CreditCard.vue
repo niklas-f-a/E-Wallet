@@ -1,8 +1,8 @@
 <template>
   <article class="credit-card" 
-    :style="{backgroundColor: card.color}"
-    :class="[{active: card.active}, {yellow: card.vendor == 'bitcoin-inc'}]"
-    @click="$emit('activate', card)"
+    :class="[{active: card.active}, {bitcoin: card.vendor == 'bitcoin-inc', blockchain: card.vendor == 'block-chain-inc', 
+      ninja: card.vendor == 'ninja-bank', evil: card.vendor == 'evil-corp'}]"
+    @click="activate"
   >
     <div v-if="removeOption" class="check-box">
       <input type="checkbox"  
@@ -15,7 +15,7 @@
       <img src="../assets/chip.svg" alt="">
     </span>
     <img :src="card.imgFile" alt="">
-    <h3>{{cardNumberWithSpaces}}</h3>
+    <h3 v-if="card">{{cardNumberWithSpaces}}</h3>
     <span class="name">
       <p>CardHolder Name</p>
       <h5>{{card.cardHolder.toUpperCase()}}</h5>
@@ -41,6 +41,9 @@ export default {
   methods:{
     checkThis(){
       this.$emit('check', this.card)
+    },
+    activate(){
+      this.$emit('activate', this.card)
     }
   }
 }
@@ -57,7 +60,19 @@ export default {
   display: grid;
   place-items: center;
 }
-.yellow > span > h5,.yellow > span > p, .yellow > h3{
+.evil{
+  background-color: #F33355;
+}
+.ninja{
+  background-color: #222222;
+}
+.blockchain {
+  background-color: #8B58F9;
+}
+.bitcoin{
+  background-color: #FFAE34;
+}
+.bitcoin > span > h5,.bitcoin > span > p, .bitcoin > h3{
   color:#000000;  
     h3, p, h5 {
       text-shadow: .5px .5px 0px rgba(254, 254, 254, .24) inset;
@@ -80,6 +95,9 @@ export default {
   box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.25);
   -webkit-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.25);
   -moz-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.25);
+  :hover{
+    cursor: pointer;
+  }
   .chip-img{
     grid-row: 1 / span 2;
     grid-column: 1 / 2;

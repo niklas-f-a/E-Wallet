@@ -77,7 +77,6 @@ export default {
       cardHolder: '', 
       ccv:'',
       imgFile: '',
-      color:'',
     }, 
     noNumbers: false,
     nameValid: false,
@@ -150,13 +149,6 @@ export default {
     select(){     
       this.input.imgFile = require(`@/assets/${this.input.vendor}.svg`)
       this.vendorValid = true
-      switch(this.input.vendor){
-        case "bitcoin-inc": this.input.color = '#FFAE34';break;
-        case "ninja-bank": this.input.color = '#222222';break;
-        case "block-chain-inc": this.input.color = '#8B58F9';break;
-        case "evil-corp": this.input.color = '#F33355';break;
-        default: this.input.color = '#D0D0D0'
-      }
     },
      inputCheck(){
       if(this.input.cardNumber.length >= 16){

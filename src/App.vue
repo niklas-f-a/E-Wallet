@@ -38,6 +38,7 @@ export default {
     deleteItem(){
       this.vendorCards = this.vendorCards.filter(c => c.remove == false)
       localStorage.setItem('cards', JSON.stringify(this.vendorCards))
+      this.removeOptions = false
     },
     check(card){
       card.remove = !card.remove

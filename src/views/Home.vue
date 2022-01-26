@@ -2,9 +2,10 @@
   <main class="main">
     <h1>E-Wallet</h1>
     <small>ACTIVE CARD</small>
-    <CreditCard 
-      v-if="active.vendor"
-      :card='active'
+    <CreditCard
+      v-if="active"
+      :card='active' 
+      @activate="$emit('activateCard', active)"     
     />
     <h1 v-else>no active</h1>
     <div class="cards"
@@ -23,7 +24,7 @@
     <span class="btn-controler">
       <button @click="$emit('remove')" v-if="option" class="remove">REMOVE</button>
       <button v-if="!option" class="removebtn" @click="$emit('toggleRemove')">REMOVE CARD</button>
-      <button v-else class="removebtn" @click="$emit('toggleRemove')">CANCEL</button>
+      <button v-else class="removebtn cancel" @click="$emit('toggleRemove')">CANCEL</button>
     </span>
     <button class="addbtn" @click="$emit('newCard')" >ADD A NEW CARD</button>
   </main>
@@ -69,6 +70,7 @@ p{
 }
 .active{
   margin-bottom: 1.5rem;
+ 
 }
 .other-cards{
   position: absolute;
