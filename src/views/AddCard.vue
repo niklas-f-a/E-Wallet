@@ -8,7 +8,7 @@
       <input  placeholder="XXXX XXXX XXXX XXXX" type="number" id="card-number" name="card-number" ref="focusMe"
         :class="{errorborder: error.cardNr}"
         v-model='input.cardNumber' 
-        @input="inputCheck" 
+        @input="inputCheckCardNr" 
       >
       <small :class="{error: error.cardNr}">{{error.cardNr}}</small>
       <label for="card-holder">CARDHOLDER NAME</label>
@@ -140,20 +140,27 @@ export default {
       this.input.expireYear = year.substring(2, 4)
       this.input.expireMonth = month
       this.monthAndYearValid = true
+      this.error.monthAndYear = ''
     },
     maxLengthCcv(){
       this.input.ccv = this.input.ccv.substring(0, 3)
-      if(this.input.ccv.length > 2){this.ccvValid = true}
-        else{this.ccvValid = false}
+      if(this.input.ccv.length > 2){
+        this.ccvValid = true
+        this.error.ccv = ''
+        }else{
+          this.ccvValid = false
+          }
     },
     select(){     
       this.input.imgFile = require(`@/assets/${this.input.vendor}.svg`)
       this.vendorValid = true
+      this.error.vendor = ''
     },
-     inputCheck(){
+     inputCheckCardNr(){
       if(this.input.cardNumber.length >= 16){
         this.input.cardNumber = this.input.cardNumber.substring(0, 16)
         this.cardNrValid = true
+        this.error.cardNr = '' 
       }else{
         this.cardNrValid = false
       }

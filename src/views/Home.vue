@@ -9,14 +9,15 @@
     />
     <h1 v-else>no active</h1>
     <div class="cards"
-      :style="{height: cards.length * 2.5 + 10 + 'rem'}"
+      :style="[option ? {height: cards.length * 11 + 2.5 + 'rem'} : {height: cards.length * 2.5 + 10 + 'rem'}]"
+      
     >
       <CreditCard v-for="(card, index) in cards"
         class="other-cards"
         @activate="$emit('activateCard', card)"
         :key="card.cardNumber"
         :card='card'
-        :style="{top: index * 2.5 +'rem'}"
+        :style="[option ? {top:index * 11 +'rem'} : {top: index * 2.5 +'rem'}]"
         :removeOption='option'
         @check="$emit('checkIt', card)"
       />
