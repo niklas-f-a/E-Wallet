@@ -10,7 +10,6 @@
     <h1 v-else>no active</h1>
     <div class="cards"
       :style="{height: cards.length * 2.5 + 10 + 'rem'}"
-      
     >
       <CreditCard v-for="card in cards"
         @activate="$emit('activateCard', card)"
@@ -74,9 +73,6 @@ p{
 .cards{
   display: grid;
   grid-auto-rows: 2.5rem;
-  :hover{
-    cursor: pointer;
-  }
 }
 
 .addbtn{

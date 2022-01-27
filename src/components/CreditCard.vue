@@ -55,9 +55,7 @@ export default {
   width: 25px;
   height: 25px;
   background-color: rgba(207, 82, 82, 0.411);
-  position: absolute;
-  left: -28px;
-  top: 10px;
+  transform: translateX(-7rem);
   display: grid;
   place-items: center;
 }
@@ -84,7 +82,6 @@ export default {
     }
   }
 .credit-card{
-  position: relative;
   height: 10rem;
   width: 17rem;
   border-radius: 8px;
@@ -96,7 +93,7 @@ export default {
   box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.25);
   -webkit-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.25);
   -moz-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.25);
-  :hover{
+  &:hover{
     cursor: pointer;
   }
   .chip-img{    
