@@ -9,15 +9,13 @@
     />
     <h1 v-else>no active</h1>
     <div class="cards"
-      :style="[option ? {height: cards.length * 11 + 2.5 + 'rem'} : {height: cards.length * 2.5 + 10 + 'rem'}]"
+      :style="{height: cards.length * 2.5 + 10 + 'rem'}"
       
     >
-      <CreditCard v-for="(card, index) in cards"
-        class="other-cards"
+      <CreditCard v-for="card in cards"
         @activate="$emit('activateCard', card)"
         :key="card.cardNumber"
         :card='card'
-        :style="[option ? {top:index * 11 +'rem'} : {top: index * 2.5 +'rem'}]"
         :removeOption='option'
         @check="$emit('checkIt', card)"
       />
@@ -73,15 +71,9 @@ p{
   margin-bottom: 1.5rem;
  
 }
-.other-cards{
-  position: absolute;
-}
 .cards{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 20rem;   
-  position: relative;
+  display: grid;
+  grid-auto-rows: 2.5rem;
   :hover{
     cursor: pointer;
   }
