@@ -100,7 +100,7 @@ export default {
     flex-direction: column;
     grid-row: 4 / 6;
     grid-column: 1 / 4;
-    align-items: start;
+    align-items: flex-start;
     justify-content: flex-start;
     p{
       font-size: 12px;
@@ -118,7 +118,7 @@ export default {
     flex-direction: column;
     grid-row: 4 / 6;
     grid-column: 4 / 6;
-    align-items: end;
+    align-items: flex-end;
     justify-content: flex-start;
     .valid  p{
     text-shadow: -.5px -.5px 0px rgba(255, 255, 255, .25);

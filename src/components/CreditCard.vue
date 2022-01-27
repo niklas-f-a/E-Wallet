@@ -137,7 +137,7 @@ export default {
     flex-direction: column;
     grid-row: 4 / 6;
     grid-column: 4 / 6;
-    align-items: end;
+    align-items: flex-end;
      p:first-child{
       font-size: 10px;
     }p:last-of-type{
